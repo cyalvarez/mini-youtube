@@ -14,7 +14,7 @@ app.use(express.static(publicDirectory))
 
 app.get('', (req, res) => {
     res.render('index', {
-        about: 'Use this page to search  videos',
+        about: 'Use this page to search  videos cyalvarez',
     })
 })
 
