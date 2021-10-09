@@ -1,0 +1,19 @@
+#sec-videos, #sec-results{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.video-item{
+    max-width: 300px;
+    box-shadow: 0px 0px 2px 2px lightgray;
+    padding: 12px;
+}
+
+.video-item div{
+    max-height: 150px;
+    overflow: hidden;
+}
+
+.video-item img{
+    width: 100%;
+}

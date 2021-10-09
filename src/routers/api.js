@@ -32,7 +32,7 @@ const upload = multer({
 })
 
 
-router.post('/videos', upload.fields([{ name: 'video', maxCount: 1 }, { name: 'image', maxCount: 1 }]), async (req, res) => {
+router.post('/video', upload.fields([{ name: 'video', maxCount: 1 }, { name: 'image', maxCount: 1 }]), async (req, res) => {
 
     console.log(req.body)
     console.log(req.files)
@@ -53,8 +53,9 @@ router.post('/videos', upload.fields([{ name: 'video', maxCount: 1 }, { name: 'i
 
 
 router.get('/videos', async (req, res) => {
-
-    let videos = await Video.find({}).lean()
+    const searchTerm = req.query.term;
+    let query = searchTerm ? {"title":{ "$regex": searchTerm, "$options": "i" }} : {}
+    let videos = await Video.find(query).lean()
     videos.map((video) => {
         delete video.url
         return video
@@ -64,7 +65,7 @@ router.get('/videos', async (req, res) => {
 })
 
 
-router.get('/videos/:id', async (req, res) => {
+router.get('/video/:id', async (req, res) => {
     const range = req.headers.range
     if (!range) {
         res.status(400).send("Requieres range header")

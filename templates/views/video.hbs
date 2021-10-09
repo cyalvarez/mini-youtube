@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <title>Video</title>
+  <script src="/js/video.js"></script>
+</head>
+
+<body>
+  {{>header}}
+  <section>
+    <video id="video-player" width="650" controls muted="muted" autoplay>
+    </video>
+    <h2>{{title}}</h2>
+    <span>Likes: {{likes}}</span>
+    <span>Dislikes: {{dislikes}}</span>
+    <p>Tags:
+    <ul>
+      {{#each tags}}
+      <li class="tag">{{this}}</li>
+      {{/each}}
+    </ul>
+    </p>
+  </section>
+
+  <div class="comment">
+    <form action="http://localhost:3000/api/comment" method="POST">
+      <input type="text" name="comment">
+      <button>Add</button>
+    </form>
+  </div>
+  <div>
+    <button id="btn-like">Like</button>
+    <button id="btn-dislike">Dislike</button>
+  </div>
+  <section>
+    <ul>
+      {{#each comments}}
+      <li class="comment">{{this}}</li>
+      {{/each}}
+    </ul>
+
+  </section>
+</body>
+
+</html>

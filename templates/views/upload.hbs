@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Upload Video</title>
+</head>
+
+<body>
+  {{>header}}
+  <form action="/api/video" method="POST" enctype="multipart/form-data">
+    <label for="title">Video title:</label>
+    <input type="text" name="title" id="title" required>
+    <label for="title">Video tags:</label>
+    <input type="text" name="tags" id="tags" required>
+    <label for="title">Video file:</label>
+    <input type="file" id="video" accept="video/mp4" name="video" required>
+    <label for="title">Image file:</label>
+    <input type="file" id="thumbnail" accept="image/*" name="image" required>
+    <button>Upload</button>
+  </form>
+</body>
+
+</html>
