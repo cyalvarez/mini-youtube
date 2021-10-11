@@ -28,16 +28,16 @@ const addVideo = (data, parent) => {
 	const divVideo = document.createElement("div")
 	const h3Title = document.createElement("h3")
 	const imgThumb = document.createElement("img")
-	const divImg = document.createElement("div")
 
 	h3Title.innerText = data.title
 	imgThumb.src = "data:image/jpeg;charset=utf-8;base64," + data.img
 
+	divVideo.appendChild(imgThumb)
 	divVideo.appendChild(h3Title)
-	divImg.appendChild(imgThumb)
-	divVideo.appendChild(divImg)
 
-	divVideo.className = "video-item"
+	h3Title.className = "card-title"
+	divVideo.className = "card video-item me-3 p-2 mb-3	"
+	imgThumb.className = "card-img-top"
 
 	divVideo.addEventListener("click", () => {
 		goToVideo(data._id)

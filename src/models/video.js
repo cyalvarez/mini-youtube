@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 
-
-const Video = mongoose.model('Video', {
+const videoShema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
@@ -13,7 +12,35 @@ const Video = mongoose.model('Video', {
     },
     img: {
         type: String
+    },
+    tags: {
+        type: [String],
+        required: true,
+        default: []
+    },
+    likes: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    dislikes: {
+        type: Number,
+        required: true,
+        default: 0
     }
+},
+    {
+        timestamps: true
+    }
+)
+
+videoShema.virtual('comments', {
+    ref: 'Comment',
+    localField: '_id',
+    foreignField: 'idvideo'
 })
+
+
+const Video = mongoose.model('Video', videoShema)
 
 module.exports = Video

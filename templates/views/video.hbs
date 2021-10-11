@@ -5,43 +5,50 @@
 <head>
   <title>Video</title>
   <script src="/js/video.js"></script>
+  {{>bootstrap}}
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body>
   {{>header}}
-  <section>
-    <video id="video-player" width="650" controls muted="muted" autoplay>
-    </video>
-    <h2>{{title}}</h2>
-    <span>Likes: {{likes}}</span>
-    <span>Dislikes: {{dislikes}}</span>
-    <p>Tags:
-    <ul>
-      {{#each tags}}
-      <li class="tag">{{this}}</li>
-      {{/each}}
-    </ul>
-    </p>
-  </section>
-
-  <div class="comment">
-    <form action="http://localhost:3000/api/comment" method="POST">
-      <input type="text" name="comment">
-      <button>Add</button>
-    </form>
+  <div class="d-flex py-3 justify-content-center">
+    <section class="d-flex flex-column">
+      <h2 class="h2">{{title}}</h2>
+      <video id="video-player" width="650" controls>
+      </video>
+      <div class="d-flex p-2">
+        <div class="col-1 d-flex align-items-center">Tags:
+        </div>
+        <ul class="col-5 d-flex flex-wrap align-items-center">
+          {{#each tags}}
+          <li class="tag me-2 d-flex"><a href="/search?term={{this}}">{{this}}</a></li>
+          {{/each}}
+        </ul>
+        <div class="col-5 d-flex justify-content-end">
+          <button class="me-2 btn btn-outline" type="button" id="btn-like">&#10084;</button>
+          <span class="d-flex align-items-center" id="span-likes">{{likes}}</span>
+          <button class="ms-4 me-2 btn btn-outline" type="button" id="btn-dislike">&#128078;</button>
+          <span class="d-flex align-items-center" id="span-dislikes">{{dislikes}}</span>
+        </div>
+      </div>
+      <div>
+        <h4>Comments</h4>
+        <div class="comment d-flex mb-3">
+          <input class="form-control" type="text" id="txt-comment" name="comment">
+          <button class="btn btn-primary ms-3" type="button" id="btn-add-comment">Add</button>
+        </div>
+        <ul id="list-comments">
+          {{#each comments}}
+          <li class="comment mb-2">
+            <strong>{{this.createdAt}}</strong>
+            {{this.comment}}
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+    </section>
   </div>
-  <div>
-    <button id="btn-like">Like</button>
-    <button id="btn-dislike">Dislike</button>
-  </div>
-  <section>
-    <ul>
-      {{#each comments}}
-      <li class="comment">{{this}}</li>
-      {{/each}}
-    </ul>
 
-  </section>
 </body>
 
 </html>
