@@ -43,7 +43,7 @@ const addCommentHandler = async (id, comment) => {
     comment: comment
   }
   try {
-    const response = await fetch("http://localhost:3000/api/comment", {
+    const response = await fetch("/api/comment", {
       method: "POST",
       body: JSON.stringify(body),
       headers: {
@@ -88,7 +88,7 @@ const setDislikes = (value) => {
 
 const likeHandler = async (id) => {
   try {
-    const response = await fetch("http://localhost:3000/api/likes/" + id, {
+    const response = await fetch("/api/likes/" + id, {
       method: "PATCH",
     })
     if (response.status === 200) {
@@ -96,13 +96,12 @@ const likeHandler = async (id) => {
       setLikes(value)
     }
   } catch (e) {
-    console.log(e)
   }
 }
 
 const dislikeHandler = async (id) => {
   try {
-    const response = await fetch("http://localhost:3000/api/dislikes/" + id, {
+    const response = await fetch("/api/dislikes/" + id, {
       method: "PATCH",
     })
     if (response.status === 200) {

@@ -19,7 +19,6 @@ const showResults = async () => {
 
 const getSearchResults = async (searchTerm) => {
   try {
-    //const res = await fetch("/api/search?s=" + searchTerm)
     const res = await fetch("/api/videos?term=" + searchTerm)
     if (res.status === 200) {
       return res.json()
@@ -27,7 +26,6 @@ const getSearchResults = async (searchTerm) => {
       return []
     }
   } catch (e) {
-    console.log(e)
     return []
   }
 }

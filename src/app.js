@@ -1,9 +1,11 @@
+const express = require('express')
 const path = require('path')
 const hbs = require('hbs')
-const express = require('express')
+
 const videoRouter = require('./routers/video')
 const frontRouter = require('./routers/front')
 const commentRouter = require('./routers/comment')
+
 require('dotenv').config()
 require('./db/mongoose')
 

@@ -19,7 +19,6 @@ const getVideos = async () => {
 			return []
 		}
 	} catch (e) {
-		console.log(e)
 		return []
 	}
 }
@@ -47,5 +46,5 @@ const addVideo = (data, parent) => {
 }
 
 const goToVideo = (id) => {
-	window.location.href = 'http://localhost:3000/video/' + id;
+	window.location.href = '/video/' + id;
 }

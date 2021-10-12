@@ -19,26 +19,35 @@ const videoStorage = multer.diskStorage({
 
 const upload = multer({
     storage: videoStorage,
+    limits: {
+        fileSize: 5000000
+    },
     fileFilter(req, file, cb) {
         if (file.fieldname == 'video') {
-            console.log('soy video ' + file.originalname)
+            if (!file.originalname.match(/\.(mp4)$/)) {
+                return cb(new Error('Please upload a video mp4'))
+            }
             cb(null, true);
         } else {
-            console.log('soy imagen ' + file.originalname)
+            if (!file.originalname.match(/\.(png|jpg)$/)) {
+                return cb(new Error('Please upload a Image png or jpg'))
+            }
             cb(null, true);
         }
     }
 })
 
 
-router.post('/video', upload.fields([{ name: 'video', maxCount: 1 }, { name: 'image', maxCount: 1 }]), videoController.postVideo)
+router.post('/video', upload.fields([{ name: 'video', maxCount: 1 }, { name: 'image', maxCount: 1 }]), videoController.postVideo, (error, req, res, next) => {
+    res.status(400).send({ error: error.message })
+})
 
 router.get('/videos', videoController.getVideos)
 
 router.get('/video/:id', videoController.getVideoById)
 
-router.patch('/likes/:id',videoController.postLikes)
+router.patch('/likes/:id', videoController.postLikes)
 
-router.patch('/dislikes/:id',videoController.postDisLikes)
+router.patch('/dislikes/:id', videoController.postDisLikes)
 
 module.exports = router

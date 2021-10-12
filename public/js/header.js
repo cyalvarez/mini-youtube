@@ -7,6 +7,6 @@
   })
 
   const searchHandler = () => {
-    window.location.href = 'http://localhost:3000/search?term=' + txtSearch.value;
+    window.location.href = '/search?term=' + txtSearch.value;
   }
 })()
