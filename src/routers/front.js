@@ -10,6 +10,9 @@ router.get('/upload', (req, res) => {
 
 router.get('/video/:id', async (req, res) => {
 	const videoData = await videoController.getVideoData(req.params.id);
+	if(!videoData){
+		return res.send(204)
+	}
 	res.render('video', {
 		title: videoData.title,
 		tags:videoData.tags,
