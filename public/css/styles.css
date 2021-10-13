@@ -1,5 +1,6 @@
 .video-item{
     min-width: 250px;
+    background-color: whitesmoke;
 }
 
 .video-item img {

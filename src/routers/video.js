@@ -46,7 +46,7 @@ router.get('/videos', videoController.getVideos)
 
 router.get('/video/:id', videoController.getVideoById)
 
-router.patch('/likes/:id', videoController.postLikes)
+router.patch('/likes/:id', videoController.patchLikes)
 
 router.patch('/dislikes/:id', videoController.postDisLikes)
 

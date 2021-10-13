@@ -20,6 +20,8 @@ router.get('/video/:id', async (req, res) => {
 			elm.createdAt = elm.createdAt.toLocaleDateString('en-US')
 			return elm
 		}) : [],
+		description: videoData.description,
+		createdAt: videoData.createdAt.toLocaleDateString('en-US'),
 		likes: videoData.likes || 0,
 		dislikes: videoData.dislikes || 0
 	})

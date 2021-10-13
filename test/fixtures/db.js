@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const Video = require('../../src/models/video')
-
+const Comment = require('../../src/models/comment')
 
 //const idVideo = new mongoose.Types.ObjectId()
 
@@ -14,6 +14,7 @@ const objVideo = {
 
 const setupDatabase = async () => {
     await Video.deleteMany()
+    await Comment.deleteMany()
 }
 
 module.exports = {

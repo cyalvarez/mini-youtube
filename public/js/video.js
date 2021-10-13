@@ -50,11 +50,10 @@ const addCommentHandler = async (id, comment) => {
         "Content-Type": "application/json"
       },
     })
-    if (response.status === 200) {
+    if (response.status === 201) {
       addComment(await response.json())
     }
   } catch (e) {
-    console.log(e)
   }
 
 }

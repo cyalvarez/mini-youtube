@@ -3,7 +3,7 @@ const Video = require('../models/video')
 
 
 exports.getVideoData = async (idVideo) => {
-	const video = await Video.findOne({ _id: idVideo }, 'title url tags likes dislikes').populate('comments').lean()
+	const video = await Video.findOne({ _id: idVideo }, 'title url tags likes dislikes description createdAt').populate('comments').lean()
 	return video
 }
 
@@ -16,6 +16,7 @@ exports.postVideo = async (req, res) => {
 
 	var objVideo = {
 		title: req.body.title,
+		description: req.body.description,
 		url: req.files.video[0].path,
 		img: encode_img,
 		tags: req.body.tags.replace(/\s\s+/g, ' ').split(' ')
@@ -29,19 +30,25 @@ exports.postVideo = async (req, res) => {
 exports.getVideos = async (req, res) => {
 	try {
 		let videos = []
-		if (Object.keys(req.query).length) {
-			if (!req.query.term) {
-				return res.status(400).send()
-			}
-			const searchTerm = req.query.term;
-			const videosByTitle = await Video.find({ title: { "$regex": searchTerm, "$options": "i" } }, 'title img').lean()
-			const videosByTags = await Video.find({ tags: { "$regex": "^" + searchTerm + "$", "$options": "i" } }, 'title img').lean()
-			videos = [...videosByTitle, ...videosByTags]
-		} else {
-			videos = await Video.find({}, 'title img').lean()
+		const infoVideos = 'title img likes dislikes description createdAt'
+		const sort = { sort: { 'createdAt': req.query.sort === 'asc' ? 1 : -1 } }
+
+		const queries = Object.keys(req.query)
+
+		if (!queries.every((str) => str === 'term' || str === 'sort')) {
+			return res.status(400).send()
 		}
+		if (req.query.term) {
+			const searchTerm = req.query.term;
+			const videosByTags = await Video.find({ $or: [{ tags: { "$regex": "^" + searchTerm + "$", "$options": "i" } }, { title: { "$regex": searchTerm, "$options": "i" } }] }, infoVideos, sort).lean()
+			videos = [...videosByTags]
+			return res.status(200).send(videos)
+		}
+
+		videos = await Video.find({}, infoVideos, sort).lean()
 		res.status(200).send(videos)
 	} catch (e) {
+		console.log(e)
 		res.status(500).send(e)
 	}
 }
@@ -80,9 +87,8 @@ exports.getVideoById = async (req, res) => {
 	}
 }
 
-exports.postLikes = async (req, res) => {
+exports.patchLikes = async (req, res) => {
 
-	const id = Object.keys(req.params.id)
 	try {
 		const video = await Video.findByIdAndUpdate(req.params.id, { $inc: { likes: 1 } }, { new: true, runValidators: true })
 		res.status(200).send({ likes: video.likes })
@@ -92,8 +98,6 @@ exports.postLikes = async (req, res) => {
 }
 
 exports.postDisLikes = async (req, res) => {
-	const id = Object.keys(req.params.id)
-	console.log(id)
 	try {
 		const video = await Video.findByIdAndUpdate(req.params.id, { $inc: { dislikes: 1 } }, { new: true, runValidators: true })
 		res.status(200).send({ dislikes: video.dislikes })
