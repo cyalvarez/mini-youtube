@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Upload Video</title>
+  <script src="/js/upload.js"></script>
+  {{>bootstrap}}
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+  {{>header}}
+  <section class="d-flex">
+    <form id="form-upload" class="container-fluid d-flex flex-column py-3 col-6 col-offset-3">
+      <label class="form-label" for="title">Title:</label>
+      <input class="form-control mb-2" type="text" name="title" id="title" required>
+        <label class="form-label" for="description">Description:</label>
+      <input class="form-control mb-2" type="text" name="description" id="description" required>
+      <label class="form-label" for="title">Tags:</label>
+      <input class="form-control mb-2" type="text" name="tags" id="tags" required>
+      <label class="form-label" for="title">Video:</label>
+      <input class="form-control mb-2" type="file" id="video" accept="video/mp4" name="video" required>
+      <label class="form-label" for="title">Thumbnail:</label>
+      <input class="form-control mb-2" type="file" id="thumbnail" accept="image/*" name="image" required>
+      <div class="d-flex justify-content-center">
+        <button id="btn-upload" type="button" class="btn btn-primary mt-3">Upload</button>
+      </div>
+    </form>
+  </section>
+</body>
+
+</html>
