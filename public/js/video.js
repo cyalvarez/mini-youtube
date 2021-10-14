@@ -16,17 +16,6 @@ window.onload = function () {
     addCommentHandler(getId(), txtComment.value)
   })
 
-  setStream(getId());
-}
-
-const setStream = (id) => {
-  const player = document.getElementById("video-player")
-  const source = document.createElement("source")
-
-  source.src = "/api/video/" + id
-  source.type = "video/mp4"
-
-  player.appendChild(source)
 }
 
 const getId = () => {

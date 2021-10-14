@@ -56,11 +56,11 @@ npm  test
 
 Example
 
-   title       title
-   description description
-   tags        tags separated by spaces
-   image       file
-   video       file
+   title     
+   description
+   tags    
+   image   
+   video    
 
 
 #### Response

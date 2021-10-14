@@ -23,7 +23,8 @@ router.get('/video/:id', async (req, res) => {
 		description: videoData.description,
 		createdAt: videoData.createdAt.toLocaleDateString('en-US'),
 		likes: videoData.likes || 0,
-		dislikes: videoData.dislikes || 0
+		dislikes: videoData.dislikes || 0,
+		urlVideo:videoData.url
 	})
 })
 

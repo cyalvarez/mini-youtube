@@ -62,7 +62,7 @@ const addVideo = (data, parent) => {
 	const date = new Date(data.createdAt)
 
 	h3Title.innerText = data.title
-	imgThumb.src = "data:image/jpeg;charset=utf-8;base64," + data.img
+	imgThumb.src =data.img
 	strDate.innerText = date.toLocaleDateString("EN-us")
 	divSocial.innerText = `❤ ${data.likes} 👎 ${data.dislikes}`
 	pDesc.innerText = data.description

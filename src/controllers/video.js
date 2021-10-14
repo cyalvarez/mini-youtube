@@ -1,24 +1,26 @@
 const fs = require("fs")
 const Video = require('../models/video')
+const fileService = require('../services/file.service')
 
 
 exports.getVideoData = async (idVideo) => {
-	const video = await Video.findOne({ _id: idVideo }, 'title url tags likes dislikes description createdAt').populate('comments').lean()
+	const video = await Video.findOne({ _id: idVideo }, 'title tags likes dislikes img url description createdAt').populate('comments').lean()
 	return video
 }
 
 exports.postVideo = async (req, res) => {
-	const { path } = req.files.image[0]
-	const img = fs.readFileSync(path)
-	const encode_img = img.toString('base64')
 
-	fs.unlinkSync(path)
+	//call video
+	const urlImg = await fileService.uploadVideo(req.files.video[0], "videos")
+
+	//call image
+	const urlVideo = await fileService.uploadImage(req.files.image[0], "images")
 
 	var objVideo = {
 		title: req.body.title,
 		description: req.body.description,
-		url: req.files.video[0].path,
-		img: encode_img,
+		url: urlImg,
+		img: urlVideo,
 		tags: req.body.tags.replace(/\s\s+/g, ' ').split(' ')
 	}
 

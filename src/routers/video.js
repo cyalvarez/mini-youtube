@@ -4,21 +4,8 @@ const multer = require('multer')
 
 const videoController = require('../controllers/video')
 
-const videoStorage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        if (file.fieldname === "video") {
-            cb(null, 'videos');
-        } else {
-            cb(null, 'images');
-        }
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.fieldname + "-" + Date.now() + file.originalname);
-    }
-})
 
 const upload = multer({
-    storage: videoStorage,
     limits: {
         fileSize: 5000000
     },
