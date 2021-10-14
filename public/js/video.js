@@ -87,7 +87,7 @@ const setDislikes = (value) => {
 
 const likeHandler = async (id) => {
   try {
-    const response = await fetch("/api/likes/" + id, {
+    const response = await fetch("/api/video/likes/" + id, {
       method: "PATCH",
     })
     if (response.status === 200) {
@@ -100,7 +100,7 @@ const likeHandler = async (id) => {
 
 const dislikeHandler = async (id) => {
   try {
-    const response = await fetch("/api/dislikes/" + id, {
+    const response = await fetch("/api/video/dislikes/" + id, {
       method: "PATCH",
     })
     if (response.status === 200) {

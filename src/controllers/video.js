@@ -24,7 +24,7 @@ exports.postVideo = async (req, res) => {
 
 	const video = new Video(objVideo)
 	await video.save()
-	res.render('index')
+	res.status(201).send()
 }
 
 exports.getVideos = async (req, res) => {

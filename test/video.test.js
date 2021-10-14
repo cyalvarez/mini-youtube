@@ -17,7 +17,7 @@ describe('Create video', () => {
             .field('title', objVideo.title)
             .field('tags', objVideo.tags)
             .field('description', objVideo.description)
-            .expect(200)
+            .expect(201)
 
         const video = await Video.findOne()
         expect(video).not.toBeNull()
@@ -77,7 +77,7 @@ test('Should increase the likes of the video', async () => {
     let { _id, likes } = await Video.findOne({}, "_id likes")
     _id = _id._id.toHexString()
     const res = await request(app)
-        .patch('/api/likes/' + _id)
+        .patch('/api/video/likes/' + _id)
         .send()
         .expect(200)
 
@@ -87,7 +87,7 @@ test('Should increase the likes of the video', async () => {
 
 test('Should fail to update likes if video does not exist', async () => {
     const res = await request(app)
-        .patch('/api/likes/' + '616605acc5d6ea13d40b50db')
+        .patch('/api/video/likes/' + '616605acc5d6ea13d40b50db')
         .send()
         .expect(400)
 })

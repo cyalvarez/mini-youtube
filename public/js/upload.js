@@ -13,7 +13,7 @@ const handleUploadVideo = async () => {
             body: formData,
         })
         switch (response.status) {
-            case 200:
+            case 201:
                 alert("Video uploaded successfully")
                 window.location.href = "/"
                 break;

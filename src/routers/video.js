@@ -37,7 +37,6 @@ const upload = multer({
     }
 })
 
-
 router.post('/video', upload.fields([{ name: 'video', maxCount: 1 }, { name: 'image', maxCount: 1 }]), videoController.postVideo, (error, req, res, next) => {
    res.status(400).send({ error: error.message })
 })
@@ -46,8 +45,8 @@ router.get('/videos', videoController.getVideos)
 
 router.get('/video/:id', videoController.getVideoById)
 
-router.patch('/likes/:id', videoController.patchLikes)
+router.patch('/video/likes/:id', videoController.patchLikes)
 
-router.patch('/dislikes/:id', videoController.postDisLikes)
+router.patch('/video/dislikes/:id', videoController.postDisLikes)
 
 module.exports = router
