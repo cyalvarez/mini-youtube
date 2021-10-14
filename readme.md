@@ -36,6 +36,12 @@ npm run start
 * Enter http: // localhost: 3000 /
 * Verify that you can see the CYtube site
 
+### Server
+
+* Open browser
+* Enter https://mini-youtube-cyalvarez.herokuapp.com/
+* Verify that you can see the CYtube site
+
 
 ### Commands
 
