@@ -2,13 +2,12 @@ const express = require('express')
 const path = require('path')
 const hbs = require('hbs')
 
-const videoRouter = require('./routers/video')
-const frontRouter = require('./routers/front')
-const commentRouter = require('./routers/comment')
-
 require('dotenv').config()
 require('./db/mongoose')
 
+const videoRouter = require('./routers/video')
+const frontRouter = require('./routers/front')
+const commentRouter = require('./routers/comment')
 
 const app = express()
 const publicDirectory = path.join(__dirname, '../public')

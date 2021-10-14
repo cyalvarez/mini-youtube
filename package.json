@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js -e js,hbs",
-    "test": "jest"
+    "test": "jest --testTimeout=15000"
   },
   "jest": {
     "testEnvironment": "node"
